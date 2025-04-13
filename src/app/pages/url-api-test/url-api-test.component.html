@@ -1,5 +1,10 @@
 <div class="test-page">
   <h2>Teste de URLs e Chamadas de API</h2>
+  <p class="github-link">
+    <a href="https://github.com/richarddiogo/Open-TraceFlow/blob/main/src/app/pages/url-api-test/url-api-test.component.ts" target="_blank">
+      Ver código no GitHub
+    </a>
+  </p>
   
   <div class="test-section">
     <h3>Teste de Navegação para URLs Quebradas</h3>
@@ -28,6 +33,20 @@
         (load)="handleIframeLoad()" 
         (error)="handleIframeError()"
       ></iframe>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h3>Teste de Captura de Erros</h3>
+    <p class="description">
+      Gere erros para testar como são capturados e registrados nos logs.
+    </p>
+    
+    <div class="error-buttons">
+      <button class="test-button error" (click)="generateReferenceError()">Erro de Referência</button>
+      <button class="test-button error" (click)="generateTypeError()">Erro de Tipo</button>
+      <button class="test-button error" (click)="generatePromiseRejection()">Promise Rejection</button>
+      <button class="test-button error" (click)="generateConsoleError()">Console Error</button>
     </div>
   </div>
   

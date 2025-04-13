@@ -12,6 +12,10 @@ import { BaseTestPage } from '../base-test-page';
     <div class="test-page">
       <h2>Teste de Eventos de Clique</h2>
       
+      <p class="github-link">
+        <a href="https://github.com/seu-usuario/seu-repositorio/blob/main/src/app/pages/click-test/click-test.component.ts" target="_blank">Ver código no GitHub</a>
+      </p>
+      
       <div class="test-area">
         <div class="click-area" (click)="trackClick($event)">
           Clique aqui (clicado: {{ clickCount }} vezes)
@@ -36,7 +40,21 @@ import { BaseTestPage } from '../base-test-page';
     
     h2 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+    }
+    
+    .github-link {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .github-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    
+    .github-link a:hover {
+      text-decoration: underline;
     }
     
     .test-area {
