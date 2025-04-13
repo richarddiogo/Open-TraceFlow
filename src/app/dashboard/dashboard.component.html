@@ -1,0 +1,81 @@
+<div class="dashboard-container">
+  <h2>Dashboard de Análise</h2>
+  
+  <div *ngIf="!metrics || !metrics.totalSessions" class="no-data">
+    <p>Nenhum dado de sessão disponível para análise.</p>
+    <p>Comece a capturar sessões de usuários para visualizar métricas e insights.</p>
+  </div>
+  
+  <div *ngIf="metrics && metrics.totalSessions > 0" class="dashboard-content">
+    <div class="metrics-summary">
+      <div class="metric-box">
+        <div class="metric-value">{{ metrics.totalSessions }}</div>
+        <div class="metric-label">Sessões</div>
+      </div>
+      
+      <div class="metric-box">
+        <div class="metric-value">{{ metrics.totalEvents }}</div>
+        <div class="metric-label">Eventos</div>
+      </div>
+      
+      <div class="metric-box">
+        <div class="metric-value">{{ formatDuration(metrics.averageSessionDuration) }}</div>
+        <div class="metric-label">Duração Média</div>
+      </div>
+    </div>
+    
+    <div class="charts-row">
+      <div class="chart-container">
+        <h3>Navegadores</h3>
+        <div class="chart-bars">
+          <div *ngFor="let browser of getObjectKeys(metrics.browsers)" class="chart-bar">
+            <div class="bar-label">{{ browser }}</div>
+            <div class="bar-container">
+              <div class="bar-fill" [style.width]="getPercentage(metrics.browsers[browser], metrics.totalSessions)"></div>
+            </div>
+            <div class="bar-value">{{ metrics.browsers[browser] }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <h3>Dispositivos</h3>
+        <div class="chart-bars">
+          <div *ngFor="let device of getObjectKeys(metrics.devices)" class="chart-bar">
+            <div class="bar-label">{{ device }}</div>
+            <div class="bar-container">
+              <div class="bar-fill" [style.width]="getPercentage(metrics.devices[device], metrics.totalSessions)"></div>
+            </div>
+            <div class="bar-value">{{ metrics.devices[device] }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="charts-row">
+      <div class="chart-container">
+        <h3>Tipos de Eventos</h3>
+        <div class="chart-bars">
+          <div *ngFor="let eventType of getObjectKeys(metrics.eventTypes)" class="chart-bar">
+            <div class="bar-label">{{ eventType }}</div>
+            <div class="bar-container">
+              <div class="bar-fill" [style.width]="getPercentage(metrics.eventTypes[eventType], metrics.totalEvents)"></div>
+            </div>
+            <div class="bar-value">{{ metrics.eventTypes[eventType] }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <h3>Sessões Recentes</h3>
+        <div class="recent-sessions">
+          <div *ngFor="let session of sessionMetrics" class="session-item">
+            <div class="session-date">{{ formatDate(session.startTime) }}</div>
+            <div class="session-duration">{{ formatDuration(session.duration) }}</div>
+            <div class="session-events">{{ session.eventCount }} eventos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,172 @@
+.dashboard-container {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+  p {
+    margin: 10px 0;
+    
+    &:first-child {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.metrics-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.metric-box {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0d6efd;
+    margin-bottom: 10px;
+  }
+  
+  .metric-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+}
+
+.charts-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  
+  .chart-container {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #495057;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.chart-bars {
+  .chart-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+    .bar-label {
+      width: 100px;
+      font-size: 0.9rem;
+      color: #495057;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .bar-container {
+      flex: 1;
+      height: 20px;
+      background-color: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0 15px;
+      
+      .bar-fill {
+        height: 100%;
+        background-color: #0d6efd;
+        border-radius: 4px;
+      }
+    }
+    
+    .bar-value {
+      width: 50px;
+      text-align: right;
+      font-size: 0.9rem;
+      color: #495057;
+    }
+  }
+}
+
+.recent-sessions {
+  .session-item {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.9rem;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .session-date {
+      flex: 2;
+      color: #495057;
+    }
+    
+    .session-duration {
+      flex: 1;
+      color: #6c757d;
+    }
+    
+    .session-events {
+      flex: 1;
+      text-align: right;
+      color: #6c757d;
+    }
+  }
+}
+
+.btn-back {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: #0b5ed7;
+  }
+}

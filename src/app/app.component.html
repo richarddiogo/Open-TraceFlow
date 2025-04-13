@@ -1,0 +1,28 @@
+<div class="container">
+  <header class="header">
+    <h1>Open-traceFlow</h1>
+    <p class="subtitle">Uma versão open source do traceFlow para rastreamento e análise de sessões de usuário</p>
+  </header>
+
+  <div class="main-content">
+    <!-- Oculta o dashboard quando estiver na rota /dashboard para evitar loop -->
+    <div *ngIf="showDashboard" class="dashboard-section">
+      <app-dashboard></app-dashboard>
+    </div>
+
+    <div class="sessions-section">
+      <div class="sessions-container">
+        <div class="session-list-wrapper">
+          <app-session-list (sessionSelected)="selectedSession = $event"></app-session-list>
+        </div>
+        <div class="session-player-wrapper">
+          <app-session-player [session]="selectedSession"></app-session-player>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Open-traceFlow &copy; 2025 - Uma alternativa open source para análise de experiência do usuário</p>
+  </footer>
+</div>

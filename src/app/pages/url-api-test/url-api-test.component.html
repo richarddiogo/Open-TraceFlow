@@ -1,0 +1,93 @@
+<div class="test-page">
+  <h2>Teste de URLs e Chamadas de API</h2>
+  
+  <div class="test-section">
+    <h3>Teste de Navegação para URLs Quebradas</h3>
+    <p class="description">
+      Simule navegação para URLs que não existem ou estão quebradas para testar como o rastreador 
+      lida com esses erros.
+    </p>
+    
+    <div class="url-input-group">
+      <input 
+        type="text" 
+        class="url-input" 
+        [(ngModel)]="urlToNavigate" 
+        placeholder="Digite uma URL (ex: https://example.com/404)"
+      >
+      <button class="test-button" (click)="navigateToUrl()">Navegar</button>
+      <button class="test-button" (click)="navigateTo404()">Erro 404</button>
+      <button class="test-button" (click)="navigateToInvalid()">URL Inválida</button>
+    </div>
+    
+    <div class="iframe-container" *ngIf="showIframe">
+      <h4>Resultado da Navegação:</h4>
+      <iframe 
+        [src]="safeUrl" 
+        sandbox="allow-same-origin allow-scripts"
+        (load)="handleIframeLoad()" 
+        (error)="handleIframeError()"
+      ></iframe>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h3>Teste de Chamadas de API</h3>
+    <p class="description">
+      Faça diferentes tipos de chamadas de API para testar como o rastreador registra 
+      requisições bem-sucedidas e com falha.
+    </p>
+    
+    <div class="api-buttons">
+      <button class="test-button success" (click)="makeSuccessApiCall()">API Sucesso (200)</button>
+      <button class="test-button warning" (click)="makeNotFoundApiCall()">API Não Encontrada (404)</button>
+      <button class="test-button error" (click)="makeServerErrorApiCall()">API Erro Servidor (500)</button>
+      <button class="test-button error" (click)="makeTimeoutApiCall()">API Timeout</button>
+      <button class="test-button warning" (click)="makeCORSErrorApiCall()">API Erro CORS</button>
+    </div>
+    
+    <div class="api-result" *ngIf="apiResponse">
+      <h4>Resposta da API:</h4>
+      <div [ngClass]="{'success-response': apiSuccess, 'error-response': !apiSuccess}">
+        <pre>{{ apiResponse | json }}</pre>
+      </div>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h3>Rastreamento de Falhas de Recursos</h3>
+    <p class="description">
+      Teste como o rastreador lida com recursos que falham ao carregar (imagens, scripts, CSS).
+    </p>
+    
+    <div class="resource-buttons">
+      <button class="test-button" (click)="loadBrokenImage()">Imagem Quebrada</button>
+      <button class="test-button" (click)="loadBrokenScript()">Script Quebrado</button>
+      <button class="test-button" (click)="loadBrokenCSS()">CSS Quebrado</button>
+    </div>
+    
+    <div class="resource-container">
+      <!-- Container para recursos carregados dinamicamente -->
+      <div id="resource-target"></div>
+      
+      <!-- Resultado da operação -->
+      <p class="resource-message" *ngIf="resourceMessage">{{ resourceMessage }}</p>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h3>Logs de Eventos</h3>
+    <div class="event-log">
+      <ul>
+        <li *ngFor="let log of eventLogs" [ngClass]="log.type">
+          <span class="timestamp">{{ log.timestamp | date:'HH:mm:ss' }}</span>
+          <span class="event-type">[{{ log.type }}]</span>
+          <span class="event-message">{{ log.message }}</span>
+        </li>
+      </ul>
+    </div>
+    <button class="btn-secondary" (click)="clearLogs()">Limpar Logs</button>
+  </div>
+  
+  <button class="back-button" (click)="navigateBack()">Voltar</button>
+</div> 

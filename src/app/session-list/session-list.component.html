@@ -1,0 +1,46 @@
+<div class="session-list-container">
+  <h2>Sessões Gravadas</h2>
+  
+  <div class="session-controls">
+    <button class="btn btn-danger" (click)="clearAllSessions()" [disabled]="sessions.length === 0">
+      Limpar Todas as Sessões
+    </button>
+  </div>
+  
+  <div *ngIf="sessions.length === 0" class="no-sessions">
+    Nenhuma sessão gravada encontrada.
+  </div>
+  
+  <div class="session-items" *ngIf="sessions.length > 0">
+    <div 
+      *ngFor="let session of sessions" 
+      class="session-item" 
+      [class.selected]="selectedSessionId === session.sessionId"
+      (click)="selectSession(session.sessionId)">
+      
+      <div class="session-header">
+        <div class="session-id">ID: {{ session.sessionId || 'Desconhecido' }}</div>
+        <div class="session-date">{{ formatSessionDate(session.startTime) }}</div>
+      </div>
+      
+      <div class="session-details">
+        <div class="session-duration">
+          <span class="label">Duração:</span> {{ getSessionDuration(session) }}
+        </div>
+        <div class="session-events">
+          <span class="label">Eventos:</span> {{ getEventCount(session) }}
+        </div>
+        <div class="session-url" *ngIf="session.metadata && session.metadata.url">
+          <span class="label">URL:</span> {{ session.metadata.url }}
+        </div>
+        <div class="session-browser" *ngIf="session.metadata && session.metadata.userAgent">
+          <span class="label">Navegador:</span> {{ session.metadata.userAgent | slice:0:50 }}...
+        </div>
+      </div>
+      
+      <div class="session-actions">
+        <button class="btn btn-primary" [disabled]="!session.events || session.events.length === 0">Reproduzir</button>
+      </div>
+    </div>
+  </div>
+</div>
