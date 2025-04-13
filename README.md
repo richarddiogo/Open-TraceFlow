@@ -1,8 +1,8 @@
-# Documentação do Projeto Open-traceFlow
+# Documentação do Projeto Open-TraceFlow
 
 ## Visão Geral
 
-Open-traceFlow é uma versão open source inspirada no traceFlow, implementada em Angular. Esta biblioteca permite rastrear interações de usuários, gravar sessões e analisar o comportamento dos usuários em aplicações web.
+Open-TraceFlow é uma solução open source para rastreamento e análise de sessões de usuário, implementada em Angular. Esta biblioteca permite rastrear interações de usuários, gravar sessões e analisar o comportamento dos usuários em aplicações web.
 
 ## Funcionalidades Principais
 
@@ -25,6 +25,36 @@ Open-traceFlow é uma versão open source inspirada no traceFlow, implementada e
    - Estatísticas de navegadores e dispositivos
    - Identificação de elementos mais clicados
 
+5. **Páginas de Teste**
+   - Ambiente isolado para testar funcionalidades de rastreamento
+   - Testes de cliques, rage-clicks, erros e navegação
+   - Simulação de chamadas API e carregamento de recursos
+
+## Páginas de Teste
+
+O projeto inclui um conjunto abrangente de páginas de teste que permitem verificar diferentes aspectos do rastreamento e gravação:
+
+![Menu de Páginas de Teste](./imgpagetest.png)
+
+1. **Teste de Cliques**: Testa o rastreamento de eventos de clique simples
+2. **Teste de Rage Clicks**: Testa a detecção de cliques repetidos que indicam frustração
+3. **Teste de Formulários**: Testa o rastreamento de entradas em formulários
+4. **Teste de Erros**: Testa a geração e captura de erros no console
+5. **Teste de URLs e APIs**: Testa navegação para URLs e chamadas de API, incluindo:
+   - Navegação para URLs quebradas
+   - Chamadas de API com diferentes códigos de status
+   - Testes de falhas de recursos (imagens, scripts, CSS)
+
+Para acessar as páginas de teste:
+1. Inicie o aplicativo (`npm start`)
+2. Navegue para `/test` no navegador
+3. Selecione o teste desejado no menu
+
+```html
+<!-- Exemplo de uso em uma aplicação -->
+<a routerLink="/test">Acessar Testes Isolados</a>
+```
+
 ## Arquitetura
 
 O projeto está organizado em módulos Angular:
@@ -32,6 +62,7 @@ O projeto está organizado em módulos Angular:
 - **Core**: Módulo principal com serviços compartilhados
 - **Tracking**: Módulo responsável pelo rastreamento de eventos
 - **Shared**: Módulo com componentes compartilhados
+- **Pages**: Contém os componentes de página, incluindo os testes isolados
 
 ### Serviços Principais
 
@@ -45,19 +76,20 @@ O projeto está organizado em módulos Angular:
 1. **SessionListComponent**: Exibe lista de sessões gravadas
 2. **SessionPlayerComponent**: Reproduz sessões gravadas
 3. **DashboardComponent**: Exibe métricas e análises
+4. **TestMenuComponent**: Menu de navegação para os testes isolados
 
 ## Instalação
 
 1. Adicione o módulo ao seu projeto Angular:
 
 ```bash
-npm install open-traceFlow --save
+npm install open-traceflow --save
 ```
 
 2. Importe o módulo em seu AppModule:
 
 ```typescript
-import { TrackingModule } from 'open-traceFlow';
+import { TrackingModule } from 'open-traceflow';
 
 @NgModule({
   imports: [
@@ -75,7 +107,7 @@ export class AppModule { }
 ### Iniciar Rastreamento
 
 ```typescript
-import { EventTrackerService, SessionRecorderService } from 'open-traceFlow';
+import { EventTrackerService, SessionRecorderService } from 'open-traceflow';
 
 @Component({
   // ...
@@ -106,7 +138,7 @@ this.eventTracker.trackCustomEvent('purchase_completed', {
 ### Detectar Rage Clicks
 
 ```typescript
-import { RageClickDetectorService } from 'open-traceFlow';
+import { RageClickDetectorService } from 'open-traceflow';
 
 @Component({
   // ...
@@ -141,6 +173,20 @@ export class AppComponent implements OnInit {
   <app-session-player [session]="selectedSession"></app-session-player>
 </div>
 ```
+
+## Problemas Conhecidos e TODOs
+
+### Problemas Críticos
+
+- **[BUG CRÍTICO]** Dashboard entrando em loop infinito ao processar determinados tipos de eventos. Necessária revisão urgente do componente `DashboardComponent` e da lógica de processamento no `AnalyticsService`.
+
+### TODOs
+
+- Implementar sistema de armazenamento em nuvem para as sessões
+- Otimizar o uso de memória durante gravações longas
+- Adicionar filtros avançados para busca de sessões
+- Melhorar a reprodução de eventos complexos (drag-and-drop, gestos)
+- Implementar exportação de dados em formatos padrão de análise
 
 ## Considerações de Privacidade
 
